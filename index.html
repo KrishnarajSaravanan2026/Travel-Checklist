@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Travel Checklist builds a personal packing checklist for your next trip." />
+    <meta name="theme-color" content="#0A2E57" />
+    <meta property="og:title" content="Travel Checklist" />
+    <meta property="og:description" content="Build a complete packing checklist for your next trip." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./favicon.svg" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Travel Checklist</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="brand-row" aria-label="Travel Checklist brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2 13.2L19.6 8.8L14.1 6.1L12 2.2L10.2 6.1L4.7 8.8L2 13.2ZM7.7 16.3L8.8 12.7L12.2 13.9L16.2 15.7L18.2 19.5L13.8 18.7L11.1 16.8L7.7 16.3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Travel Checklist</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-main">Pack once.</span>
+        <span class="title-accent">Forget nothing.</span>
+      </h1>
+      <p class="tagline">Build a better checklist for every trip.</p>
+    </header>
+
+    <main id="main-content" class="page-shell">
+      <nav class="stepper" aria-label="Trip progress">
+        <button class="step active" type="button" data-step-nav="1" aria-current="step">
+          <span class="step-number">1</span>
+          <span class="step-text">Destination</span>
+        </button>
+        <button class="step" type="button" data-step-nav="2">
+          <span class="step-number">2</span>
+          <span class="step-text">Travelers</span>
+        </button>
+        <button class="step" type="button" data-step-nav="3">
+          <span class="step-number">3</span>
+          <span class="step-text">Checklist</span>
+        </button>
+      </nav>
+
+      <section class="step-panel active" data-step-panel="1" aria-labelledby="destination-heading">
+        <div class="panel-head">
+          <h2 id="destination-heading" class="section-title"><span class="title-main">Where are you headed?</span></h2>
+        </div>
+        <div id="destination-grid" class="destination-grid" aria-live="polite"></div>
+        <div class="selection-row">
+          <p id="destination-summary" class="selection-summary">0 selected</p>
+          <button id="destination-continue" class="primary-button" type="button" disabled>Continue</button>
+        </div>
+      </section>
+
+      <section class="step-panel" data-step-panel="2" aria-labelledby="travelers-heading">
+        <div class="panel-head">
+          <h2 id="travelers-heading" class="section-title"><span class="title-main">Your trip</span> <span class="title-accent">details</span></h2>
+        </div>
+        <div id="travelers-panel" class="travelers-panel"></div>
+      </section>
+
+      <section class="step-panel" data-step-panel="3" aria-labelledby="checklist-heading">
+        <div class="panel-head checklist-head">
+          <h2 id="checklist-heading" class="section-title"><span class="title-main">Your</span> <span class="title-accent">checklist</span></h2>
+        </div>
+        <div id="trip-ribbon" class="trip-ribbon" aria-live="polite"></div>
+        <div id="progress-card" class="progress-card"></div>
+        <div class="toolbar" aria-label="Checklist tools">
+          <div class="search-wrap">
+            <input id="search-input" type="search" placeholder="Search items" aria-label="Search checklist items" />
+          </div>
+          <div class="filter-group" role="group" aria-label="Filter checklist">
+            <button class="filter-button active" type="button" data-filter="all">All</button>
+            <button class="filter-button" type="button" data-filter="unpacked">Unpacked</button>
+            <button class="filter-button" type="button" data-filter="packed">Packed</button>
+          </div>
+          <label class="checkbox-inline" for="essentials-only">
+            <input id="essentials-only" type="checkbox" />
+            <span>Essentials only</span>
+          </label>
+          <div class="action-row">
+            <button id="pack-all" class="secondary-button" type="button">Pack all</button>
+            <button id="clear-items" class="secondary-button" type="button">Clear</button>
+            <button id="copy-list" class="secondary-button" type="button">Copy list</button>
+            <button id="print-list" class="secondary-button" type="button">Print</button>
+            <button id="new-trip" class="primary-button" type="button">New trip</button>
+          </div>
+        </div>
+        <div id="checklist-categories" class="category-list" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state hidden">No items match this search.</div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+    <script>
+      if (location.protocol.startsWith('http')) {
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+            navigator.serviceWorker.register('./sw.js').catch(function () {
+              // Registration is optional and silent if unavailable.
+            });
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
