@@ -30,11 +30,12 @@
 
 ## Run it locally
 
-Open `index.html` directly in a browser, or run a local server from the project folder. The server is recommended for testing service-worker and offline behavior.
+Open `travel-checklist-app/index.html` directly in a browser, or run a local server from the app folder. The server is recommended for testing service-worker and offline behavior.
 
 On Windows, start Python's built-in static server:
 
 ```powershell
+Set-Location .\travel-checklist-app
 py -m http.server 8765
 ```
 
@@ -88,17 +89,22 @@ Travel-Checklist/
 ├── .gitattributes
 ├── .gitignore
 ├── README.md
-├── app.js
-├── data.js
-├── favicon.svg
-├── index.html
-├── manifest.webmanifest
-├── styles.css
-├── sw.js
 ├── tests/
 │   └── guard.test.js
-└── .nojekyll
+├── travel-checklist-app/
+│   ├── assets/
+│   │   ├── favicon.svg
+│   │   └── manifest.webmanifest
+│   ├── scripts/
+│   │   ├── app.js
+│   │   └── data.js
+│   ├── styles/
+│   │   └── styles.css
+│   ├── index.html
+│   └── sw.js
 ```
+
+The `.git/` directory stores Git history and is required for version-control operations, but is not needed to run the app. `.gitignore` and `.gitattributes` configure source control; `.github/` contains deployment and repository-guard workflows; `.githooks/` and `tests/` support the optional local commit guard. The Pages workflow creates `.nojekyll` in its deployment artifact, so no root `.nojekyll` file is needed.
 
 ## How the checklist is built
 
@@ -162,9 +168,9 @@ The blue accent is reserved for large headlines, progress fill, focus rings, and
 
 ## Offline use and updates
 
-Travel Checklist uses a service worker to cache the application files and keep the checklist available without a network connection.
+Travel Checklist uses a service worker to cache the application files and keep the checklist available without a network connection. The app is organized under `travel-checklist-app/`; scripts, styles, and static assets are grouped into their own folders.
 
-When the app files change, bump the cache name in sw.js to force a replacement of the old cache. The build and deployment workflow keeps the static files in a simple GitHub Pages layout without a build step.
+When the app files change, bump the cache name in `travel-checklist-app/sw.js` to force a replacement of the old cache. The build and deployment workflow copies the app folder contents to the GitHub Pages root without a build step.
 
 ## Privacy
 
@@ -174,11 +180,11 @@ The checklist is stored in localStorage only. No personal trip data is sent to a
 
 | Problem | Fix |
 | --- | --- |
-| Page does not load | Open the project in a browser or start the local server on port 8765 |
+| Page does not load | Open `travel-checklist-app/index.html` in a browser or start the local server from `travel-checklist-app` on port 8765 |
 | Search returns no results | Clear the search field or adjust the filter buttons |
 | Custom item does not render | Check that the item was added with a non-empty value |
 | Copy fails in browser | Use the print option or copy from a browser that supports clipboard access |
-| Service worker does not update | Bump the CACHE value in sw.js and reload the page |
+| Service worker does not update | Bump the CACHE value in `travel-checklist-app/sw.js` and reload the page |
 
 ## Roadmap
 

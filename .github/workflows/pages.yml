@@ -29,20 +29,14 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
-          node --check data.js
-          node --check app.js
-          node --check sw.js
+          node --check travel-checklist-app/scripts/data.js
+          node --check travel-checklist-app/scripts/app.js
+          node --check travel-checklist-app/sw.js
 
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html _site/index.html
-          cp styles.css _site/styles.css
-          cp data.js _site/data.js
-          cp app.js _site/app.js
-          cp sw.js _site/sw.js
-          cp favicon.svg _site/favicon.svg
-          cp manifest.webmanifest _site/manifest.webmanifest
+          cp -R travel-checklist-app/. _site/
           touch _site/.nojekyll
 
       - name: Configure Pages
