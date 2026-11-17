@@ -2,7 +2,7 @@
   "name": "Travel Checklist",
   "short_name": "Travel List",
   "description": "A personalised packing checklist for your next trip.",
-  "start_url": "./",
+  "start_url": "../",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#0A2E57",

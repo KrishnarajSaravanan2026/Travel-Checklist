@@ -1,13 +1,13 @@
-const CACHE = 'travelpack-v1';
+const CACHE = 'travelpack-v2';
 const APP_FILES = [
   './',
   './index.html',
-  './styles.css',
-  './data.js',
-  './app.js',
+  './styles/styles.css',
+  './scripts/data.js',
+  './scripts/app.js',
   './sw.js',
-  './favicon.svg',
-  './manifest.webmanifest'
+  './assets/favicon.svg',
+  './assets/manifest.webmanifest'
 ];
 
 self.addEventListener('install', function (event) {
